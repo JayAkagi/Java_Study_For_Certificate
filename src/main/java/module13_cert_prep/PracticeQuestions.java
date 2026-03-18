@@ -1,3 +1,4 @@
+package module13_cert_prep;
 /**
  * MODULE 13 — Certification Practice Questions
  *
@@ -7,7 +8,6 @@
  *     2. Write your answer in the comment "YOUR ANSWER:"
  *     3. Then run the code to verify
  *
- * Run: javac PracticeQuestions.java && java PracticeQuestions
  */
 public class PracticeQuestions {
 
