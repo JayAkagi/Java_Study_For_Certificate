@@ -161,13 +161,23 @@ public class Exercise {
     //             map.merge("bananas", -10, Integer::sum)
     //           Return the final map. Expected: {apples=75, bananas=20, oranges=20}
     static Map<String, Integer> buildInventory() {
-        return new HashMap<>(); // placeholder
+        Map<String, Integer> hashMap = new HashMap<>(
+            Map.of(
+                "apples", 50,
+                "bananas", 30,
+                "oranges", 20
+            )
+        );
+
+        hashMap.replace("apples", 50, 75);
+        hashMap.merge("bananas", -10, Integer::sum);
+        return hashMap; // placeholder
     }
 
     // TO DO 5b: Return map.getOrDefault(key, 0).
     //           If key doesn't exist, return 0.
     static int getOrDefaultZero(Map<String, Integer> map, String key) {
-        return -1; // placeholder
+        return map.getOrDefault(key, 0); // placeholder
     }
 
     // -------------------------------------------------------------------------
@@ -179,7 +189,14 @@ public class Exercise {
     //           Return it. (TreeMap sorts alphabetically by key.)
     //           Expected first key: "Alice", last key: "Charlie"
     static TreeMap<String, String> buildPhonebook() {
-        return new TreeMap<>(); // placeholder
+        TreeMap<String, String> phoneBook = new TreeMap<>(
+            Map.of(
+                "Charlie", "555-0001",
+                "Alice", "555-0002",
+                "Bob", "555-0003"
+            )
+        );
+        return phoneBook; // placeholder
     }
 
     // -------------------------------------------------------------------------
@@ -191,6 +208,10 @@ public class Exercise {
     //           Return the modified list.
     //           For [1,2,3,4,5,6,7,8,9,10]: [1, 3, 5, 7, 9]
     static List<Integer> removeEvens(List<Integer> numbers) {
+        Iterator<Integer> it = numbers.iterator();
+        while(it.hasNext()){
+            if(it.next() % 2 == 0) it.remove();
+        }
         return numbers; // placeholder
     }
 
@@ -198,6 +219,10 @@ public class Exercise {
     //           Return the modified list.
     //           For ["hello","world","java","programming","fun"], maxLength=4: [java, fun]
     static List<String> removeByLength(List<String> words, int maxLength) {
+        Iterator<String> it = words.iterator();
+        while(it.hasNext()){
+            if(it.next().length() > maxLength) it.remove();
+        }
         return words; // placeholder
     }
 
@@ -207,27 +232,36 @@ public class Exercise {
 
     // TO DO 8a: Sort the list ascending using Collections.sort() and return it.
     static List<Integer> sortAscending(List<Integer> nums) {
-        return nums; // placeholder
+        Collections.sort(nums);
+        return  nums;// placeholder
     }
 
     // TO DO 8b: Reverse the list using Collections.reverse() and return it.
     static List<Integer> reverseList(List<Integer> nums) {
+        Collections.reverse(nums);
         return nums; // placeholder
     }
 
     // TO DO 8c: Return the minimum value using Collections.min()
     static int minOf(List<Integer> nums) {
-        return 0; // placeholder
+        int min = Collections.min(nums);
+        return min; // placeholder
     }
 
     // TO DO 8d: Return the maximum value using Collections.max()
     static int maxOf(List<Integer> nums) {
-        return 0; // placeholder
+        int max = Collections.max(nums);
+        return max; // placeholder
     }
 
     // TO DO 8e: Return how many times 'val' appears in 'list' using Collections.frequency()
     static int frequencyOf(List<Integer> list, int val) {
-        return 0; // placeholder
+        Iterator<Integer> iterator = list.iterator();
+        int total = 0;
+        while(iterator.hasNext()){
+            if(iterator.next() == val) total ++;
+        }
+        return total; // placeholder
     }
 
     // -------------------------------------------------------------------------
@@ -242,6 +276,12 @@ public class Exercise {
     //        For "the cat sat on the mat the cat sat":
     //              {cat=2, mat=1, on=1, sat=2, the=3}
     static Map<String, Integer> wordFrequency(String sentence) {
-        return new TreeMap<>(); // placeholder
+        String[] words = sentence.split(" ");
+        TreeMap<String, Integer> wordOccurence = new TreeMap<>();
+        for(String word : words){
+            wordOccurence.merge(word, 1, Integer::sum);
+        }
+        
+        return wordOccurence; // placeholder
     }
 }
