@@ -15,19 +15,21 @@ import java.util.Objects;
 // TO DO 1a: Vehicle class
 // ============================================================================
 class Vehicle {
-    String make;
-    int year;
+    public String make;
+    public int year;
 
     Vehicle(String make, int year) {
         // TO DO: store make and year
+        this.make = make;
+        this.year = year;
     }
 
     String getInfo() {
-        return ""; // TO DO: return "Make: [make], Year: [year]"
+        return String.format("Make: %s, Year: %d", make, year); // TO DO: return "Make: [make], Year: [year]"
     }
 
     String getStartSound() {
-        return ""; // TO DO: return "[make]'s engine starts: Vroom!"
+        return String.format("%s's engine starts: Vroom!"); // TO DO: return "[make]'s engine starts: Vroom!"
     }
 }
 
@@ -40,15 +42,16 @@ class Car extends Vehicle {
     Car(String make, int year, int numDoors) {
         super(make, year);
         // TO DO: store numDoors
+        this.numDoors = numDoors;
     }
 
     @Override
     String getStartSound() {
-        return ""; // TO DO: return "[make]'s car engine purrs: Vroooom!"
+        return String.format("%s's car engine purrs: Vroooom!", make); // TO DO: return "[make]'s car engine purrs: Vroooom!"
     }
 
     String honk() {
-        return ""; // TO DO: return "[make] goes: Beep beep!"
+        return String.format("%s goes: Beep beep!", make); // TO DO: return "[make] goes: Beep beep!"
     }
 }
 
@@ -61,15 +64,18 @@ class Truck extends Vehicle {
     Truck(String make, int year, double payloadTons) {
         super(make, year);
         // TO DO: store payloadTons
+        this.payloadTons = payloadTons;
     }
 
+    // TO DO: return "[make]'s truck engine roars: BRRRMM!"
     @Override
-    String getStartSound() {
-        return ""; // TO DO: return "[make]'s truck engine roars: BRRRMM!"
+    String getStartSound(){
+        return String.format("%s's truck engine roars: BRRRMM!", make);
     }
 
-    String loadCargo() {
-        return ""; // TO DO: return "Loading [payloadTons] tons of cargo"
+    // TO DO: return "Loading [payloadTons] tons of cargo"
+    String loadCargo(){
+        return String.format("Loading %.1f tons of cargo", payloadTons);
     }
 }
 
@@ -82,12 +88,14 @@ abstract class Employee {
 
     Employee(String name, double baseSalary) {
         // TO DO: store fields
+        this.name = name;
+        this.baseSalary = baseSalary;
     }
 
     abstract double calculateBonus();
 
     double totalPay() {
-        return 0.0; // TO DO: return baseSalary + calculateBonus()
+        return baseSalary + calculateBonus(); // TO DO: return baseSalary + calculateBonus()
     }
 }
 
@@ -100,11 +108,12 @@ class Manager extends Employee {
     Manager(String name, double baseSalary, int teamSize) {
         super(name, baseSalary);
         // TO DO: store teamSize
+        this.teamSize = teamSize;
     }
 
     @Override
     public double calculateBonus() {
-        return 0.0; // TO DO: return baseSalary * 0.20
+        return baseSalary * 0.20; // TO DO: return baseSalary * 0.20
     }
 }
 
@@ -117,11 +126,12 @@ class Developer extends Employee {
     Developer(String name, double baseSalary, String programmingLanguage) {
         super(name, baseSalary);
         // TO DO: store programmingLanguage
+        this.programmingLanguage = programmingLanguage;
     }
 
     @Override
     public double calculateBonus() {
-        return 0.0; // TO DO: return baseSalary * 0.15
+        return baseSalary * 0.15; // TO DO: return baseSalary * 0.15
     }
 }
 
@@ -138,7 +148,7 @@ interface Printable {
 interface Saveable {
     String save();
     default String backup() {
-        return ""; // TO DO: return "Creating backup..."
+        return "Creating backup..."; // TO DO: return "Creating backup..."
     }
 }
 
@@ -148,18 +158,20 @@ interface Saveable {
 class Document implements Printable, Saveable {
     String title;
 
-    Document(String title) {
-        // TO DO: store title
+    Document(String title){
+        this.title = title;
     }
 
     @Override
-    public String print() {
-        return ""; // TO DO: return "Printing document: [title]"
+    public String print(){
+        //TO DO: return "Printing document: [title]"
+        return String.format("Printing document: %s", title);
     }
+
 
     @Override
     public String save() {
-        return ""; // TO DO: return "Saving document: [title] to disk"
+        return String.format("Saving document: %s to disk", title); // TO DO: return "Saving document: [title] to disk"
     }
 }
 
@@ -173,21 +185,29 @@ class Book {
 
     Book(String title, String author, int year) {
         // TO DO: store fields
+        this.title = title;
+        this.author = author;
+        this.year = year;
     }
 
     @Override
-    public boolean equals(Object o) {
-        return false; // TO DO: return true if same title AND author (cast to Book, check fields)
+    public boolean equals(Object o) { 
+        // TO DO: return true if same title AND author (cast to Book, check fields)
+        if(this == o) return true;
+        if(!(o instanceof Book)) return false;
+
+        Book book = (Book) o;
+        return this.title.equals(book.title) && this.author.equals(book.author);
     }
 
     @Override
     public int hashCode() {
-        return 0; // TO DO: return Objects.hash(title, author)
+        return Objects.hash(title, author); // TO DO: return Objects.hash(title, author)
     }
 
     @Override
     public String toString() {
-        return ""; // TO DO: return "Book{title='[title]', author='[author]', year=[year]}"
+        return String.format("Book{title='%s', author='%s', year=%d}", title,author,year); // TO DO: return "Book{title='[title]', author='[author]', year=[year]}"
     }
 }
 
